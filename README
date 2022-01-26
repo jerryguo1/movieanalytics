@@ -1,0 +1,19 @@
+Introduction
+Dataset used: CSV file retrieved from Kaggle which contains information from IMDB about movies released in the past 40 years. The database includes movie title, release year, budget, director, user votes, score, rating, reviews, etc. Analyzed data and developed machine learning model that predicts whether an upcoming movie will be successful or not. 
+
+Charts: 
+Bokeh for data visualization given its interactive plotting features. The questions to answer: 
+Are budget and revenue similar for each movie genre, or are there significant differences?
+Who are the top five directors?
+In the last 10 years, which production companies have been the most profitable?
+
+
+Correlation Analysis
+Hypothesized that budget and earnings would be positively correlated and tested this using the Pandas corr() function. Correlation was positive and significant (~0.74), visualized with scatterplot. After doing a correlation matrix using seaborn to find other correlations between the numerical data, found that budget and gross had the strongest correlation, followed by votes and gross earnings. Because votes were inconsistent, plotted correlation between gross earnings and audience score. The correlation was weak (~0.22), meaning it is likely unimportant, which is interesting considering both audience scores and gross earnings reflect public sentiment of a movie. Interpretation: a movie could be watched by many people (resulting in high earnings), and receive bad reviews (resulting in low audience scores), and vice versa.
+
+Machine Learning Algorithm
+Data prep: Added the ‘released day of week’, gross-to-budget ratio column for dependent variable. Dropped the columns we considered not to be causal. Used the gross-to-budget ratio as a criterion to create the ‘success’ column: if the ratio is bigger than 1.2 (over 20% return on investment) deemed successful.
+Tried lasso, SGD, and RF. RF had best results by far
+Plotted ROC and PR curves
+Inputted all the necessary information of ‘Spider Man: No Way Home’ as a data point, did label encoding by using label mapping for it, and added this data point into our original data set to do one-hot encoding and standardization in order to get the same number of features with the same format as our training set and testing set. Then, extracted this standardized data point and used Random Forest Classifier to predict if the movie would be successful. The prediction turned out ‘successful’.
+
